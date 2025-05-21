@@ -10,7 +10,13 @@
   font-weight: 300;
   font-style: normal;
 }
-    
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-Regular.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
 *{
     padding: 0;
     margin: 0;
@@ -81,8 +87,8 @@ header{
 }
 main{
     max-width: 100%;
-    min-height: calc( 100vh - 60px );
-    overflow: hidden;    
+    width: 100%; 
+    min-height: calc( 100vh - 60px ); 
 }
 #streameurs{
     width: 100%;
@@ -90,7 +96,207 @@ main{
     display: flex;
     justify-content: center;
     margin-top: 70px;
-    background-color: red;
+    // background-color: red;
+    position: relative;
+
+    .container{
+        max-width: 1200px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        padding: 20px 10px;
+        z-index: 2;
+        color: #fff;
+
+        .title{
+            width: 100%; 
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            // background-color: yellow;   
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 30px;
+        }
+        .container_line{
+            width: 900px;
+            height: 100px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            // background-color: red;
+
+            .streameur{
+                width: 120px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                margin: 0 10px;
+                // background-color: yellow;  
+
+                .picture{
+                    width: 100%;
+                    height: 80px; 
+                    display: flex;
+                    justify-content: center;
+                    align-items: center; 
+
+                    img{
+                        height: 80%;
+                        border-radius: 50%;
+                        // filter: grayscale(100%);
+                    }  
+                } 
+                .pseudo{
+                    width: 100%;
+                    height: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden;   
+                    font-weight: bold; 
+                    color: #858585;
+                } 
+            }
+        }
+        .container-carrousel{
+            width: 100%;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            // background-color: red;
+            padding: 20px 0;   
+            margin-bottom: 40px;
+
+            .card{
+                width: 500px;
+                height: 180px;
+                background-color: #414141; 
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;  
+            
+                .card_presentation{
+                    width: 150px;
+                    height: 100%;
+                    padding: 10px 5px;
+                    display: flex;
+                    flex-direction: column;
+                    // background-color: red;   
+
+                    .profil_picture{
+                        width: 100%;
+                        height: 100px;
+                        display: flex;
+                        justify-content: center;
+                        // background-color: yellow; 
+
+                        img{
+                            height: 100%;
+                            border-radius: 50%;
+                        }  
+                    }
+                    .profil_name{
+                        width: 100%;
+                        height: 20px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-top: 5px;
+                        // background-color: red;
+                        font-size: 0.9rem; 
+                        color: #cc6da0;
+                        // font-weight: bold;
+                        letter-spacing: 1px;
+
+                        svg{
+                            color: #f7a661;    
+                        }
+                    }
+                }
+                .card_body{
+                    width: 350px;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    // background-color: yellow;    
+
+                    .message{
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        justify-content: space-between;
+                        padding-top: 10px;
+                        // background-color: blue;   
+                        
+                        .chevron{
+                            width: 30px;
+                            height: auto;
+                            display: flex;
+                            margin-left: 5px;
+                        }
+                        .chevron-end{
+                            align-items: flex-end;    
+                            margin-right: 5px;
+                        }
+
+                        span{
+                            padding-top: 4px;  
+                            line-height: 25px;
+                            font-size: 0.9rem;
+                            text-transform: uppercase;
+                            width: calc( 100% - 60px );
+                            // text-align: center;
+                        }
+                    }
+                    .reseau{
+                        width: 100%;
+                        height: 25px;
+                        display: flex;
+                        align-items: center;
+                        text-transform: uppercase;
+                        font-size: 0.75rem;
+                        justify-content: flex-end;
+                        padding: 0 5px;
+                        // background-color: red;  
+
+                        a{
+                            color: #fff;
+                            text-decoration: none; 
+                            margin-left: 4px;   
+                        } 
+                        .youtube{
+                            color: #f03;
+                        }
+                        .twitch{
+                            color: #9147ff;
+                        }
+                        .kick{
+                            color: #53fc18;    
+                        }
+                        .tiktok{
+                            color: #000;
+                        }
+                    }
+                }
+            }
+            .switch_left{
+                animation: carousel_left 1.2s ease-out forwards; 
+            }
+            .switch_right{
+                animation: carousel_right 1.2s ease-out forwards; 
+            }
+        }
+    }
 }
 #acceuil{
     width: 100%;
@@ -99,6 +305,7 @@ main{
     justify-content: center;
     background-color: #fff;
     padding-top: 20px;
+    position: relative;
 
     .container{
         max-width: 1200px;
@@ -109,6 +316,7 @@ main{
         justify-content: flex-end;
         position: relative;
         padding: 0 10px;
+        z-index: 2;
         // background-color: red;
 
         .img_preview{
@@ -203,13 +411,17 @@ main{
         }
     }
 }
-
+footer{
+    width: 100%;
+    height: 200px;    
+    background-color: #fff;
+}
 .wave{
     position: absolute;
-    top: 510px;
+    top: 450px;
     left: 0;
     right: 0;
-    z-index: -5;
+    z-index: 1;
 
     svg{
         display: block;
@@ -232,5 +444,24 @@ main{
     }
     100%{
         opacity: 1;   
+    }
+}
+@keyframes carousel_left {
+    0%{
+        opacity: 1;    
+    }
+    100%{
+        opacity: 0;
+        margin-right: 200px;    
+    }
+}
+    @keyframes carousel_right {
+    0%{
+        opacity: 0;   
+        margin-left: 200px; 
+    }
+    100%{
+        opacity: 1;
+        margin-right: 0;    
     }
 }

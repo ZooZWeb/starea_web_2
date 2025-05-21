@@ -34,13 +34,136 @@ $('#app').append(`
           </div>
       </div>
       <div class="wave">
-      <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="display: block; width: 100%; height: 80px;">
-        <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="fill: #ffffff;"></path>
-      </svg>
-    </div>
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="display: block; width: 100%; height: 80px;">
+          <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="fill: #ffffff;"></path>
+        </svg>
+      </div>
     </section>
     <section id="streameurs">
-      
+      <div class="container">
+        <div class="title">
+          ils nous font confiance
+        </div>
+        <div class="container-carrousel">
+          <div class="card" data-name="${data_stream[0].pseudo}" data-id="0">
+            <div class="card_presentation">
+              <div class="profil_picture">
+                  <img src="${data_stream[0].picture}">
+              </div>
+              <div class="profil_name">
+                ${data_stream[0].pseudo}
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" aria-hidden="true" height="18px" width="18px" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd"></path></svg>
+              </div>
+            </div>
+            <div class="card_body">
+              <div class="message">
+                <div class="chevron">
+                  <svg stroke="#595656" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="30px" width="30px" xmlns="http://www.w3.org/2000/svg"><path d="M11 7l-5 5l5 5"></path><path d="M17 7l-5 5l5 5"></path></svg>
+                </div>
+                <span>${data_stream[0].message}</span>
+                <div class="chevron chevron-end">
+                  <svg stroke="#595656" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="30px" width="30px" xmlns="http://www.w3.org/2000/svg"><path d="M7 7l5 5l-5 5"></path><path d="M13 7l5 5l-5 5"></path></svg>
+                </div>
+              </div>
+              <div class="reseau">
+                streameur ${data_stream[0].platform} <a class="${data_stream[0].platform}" target="_blank" href="${data_stream[0].url}">@${data_stream[0].pseudo}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container_line"></div>
+      </div>
+      <div class="wave">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="display: block; width: 100%; height: 80px;">
+          <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="fill: #353131;"></path>
+        </svg>
+      </div>
     </section>
   </main>
+  <footer>
+
+  </footer>
 `);
+
+// observateur
+$(window).on('scroll', function () {
+  let $el = $('.ma-div');
+  let windowBottom = $(window).scrollTop() + $(window).height();
+  let elTop = $el.offset().top;
+
+  if (windowBottom > elTop) {
+    $el.addClass('visible');
+    dejaVu = true; // pour ne le faire qu'une fois
+  }
+});
+
+// CAROUSEL STREAMEUR
+
+const go_carousel = () => {
+  setTimeout(() => {
+    const name = $('.card').data('name');
+    const id = $('.card').data('id');
+
+    $(`.card[data-name="${name}"]`).addClass('switch_left');
+    $(`.card[data-name="${name}"]`).removeClass('switch_right');
+    setTimeout(() => {
+      $(`.card[data-name="${name}"]`).remove();
+      create_new_card(id);
+    }, 1200)
+  }, 5000)
+}
+const create_new_card = (old_id) =>{
+  let id = old_id + 1;
+
+  if(id > data_stream.length - 1) id = 0;
+
+  const card = `
+    <div class="card switch_right" data-name="${data_stream[id].pseudo}" data-id="${id}">
+            <div class="card_presentation">
+              <div class="profil_picture">
+                  <img src="${data_stream[id].picture}">
+              </div>
+              <div class="profil_name">
+                ${data_stream[id].pseudo}
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" aria-hidden="true" height="18px" width="18px" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd"></path></svg>
+              </div>
+            </div>
+            <div class="card_body">
+              <div class="message">
+                <div class="chevron">
+                  <svg stroke="#595656" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="30px" width="30px" xmlns="http://www.w3.org/2000/svg"><path d="M11 7l-5 5l5 5"></path><path d="M17 7l-5 5l5 5"></path></svg>
+                </div>
+                <span>${data_stream[id].message}</span>
+                <div class="chevron chevron-end">
+                  <svg stroke="#595656" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="30px" width="30px" xmlns="http://www.w3.org/2000/svg"><path d="M7 7l5 5l-5 5"></path><path d="M13 7l5 5l-5 5"></path></svg>
+                </div>
+              </div>
+              <div class="reseau">
+                streameur ${data_stream[id].platform} <a class="${data_stream[id].platform}" target="_blank" href="${data_stream[id].url}">@${data_stream[id].pseudo}</a>
+              </div>
+            </div>
+          </div>
+  `;
+
+  $('.container-carrousel').append(card);
+
+  go_carousel();
+}
+const go_line_carousel = () => {
+  for(let i = 0; i < data_stream.length; i++){
+    if(i <= 6){
+      const streameur = `<div class="streameur">
+            <div class="picture">
+              <img src="${data_stream[i].picture}">
+            </div>
+            <div class="pseudo">
+              ${data_stream[i].pseudo}
+            </div>
+          </div>`;
+
+        $('.container_line').append(streameur);
+    }
+  }
+}
+go_carousel();
+go_line_carousel();
